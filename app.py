@@ -13,12 +13,13 @@ st.title("🤖 Nexora AI Assistant")
 st.write("আপনার নিজের প্রিমিয়াম এআই চ্যাট অ্যাপ্লিকেশন!")
 
 # Initialize Groq Client
-API_KEY = "guUfL0nY5akP7vd1rmyMu"
+API_KEY = "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"
 
 if not API_KEY:
     st.warning("⚠️ দয়া করে আপনার Groq API Key দিন।")
 else:
     client = Groq(api_key=API_KEY)
+	
 
     # Initialize chat history in session state
     if "messages" not in st.session_state:

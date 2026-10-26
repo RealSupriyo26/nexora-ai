@@ -1,0 +1,36 @@
+name: Set up Nexora AI
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Create Flutter project
+        run: |
+          flutter create \
+            --project-name nexora_ai \
+            --org com.nexoraai \
+            --platforms=android,ios,windows,macos,linux \
+            .
+
+      - name: Commit Flutter files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --cached --quiet || git commit -m "Create Flutter cross-platform project"
+          git push
